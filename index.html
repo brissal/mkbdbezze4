@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add to Base</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #2f2e52;
+            display: flex;
+            flex-direction: column; /* Переключаем на вертикальное расположение */
+            align-items: center; /* Выравниваем по центру */
+            justify-content: center;
+            margin: 0;
+            height: 100vh;
+        }
+
+        .section-container {
+            text-align: center;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        h1 {
+            color: white;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            display: block;
+            margin-top: 5px;
+            border: 2px solid #474747;
+            border-radius: 7px;
+            padding: 10px;
+            width: 100%; /* Изменено на 100% для заполнения всей ширины */
+            background-color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            color: white;
+            text-align: center;
+        }
+
+        .button {
+            font-family: 'Raleway', sans-serif;
+            background-color: #5c5c5c;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            display: inline-block;
+            margin: 5px 4px;
+            width: 100%;
+            transition: all 0.5s;
+            cursor: pointer;
+            border-radius: 10px;
+            transform: scale(1);
+        }
+
+        .button:hover {
+            background-color: #333;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .button:active {
+            background-color: #5c5c5c;
+            transform: translateY(4px);
+        }
+
+        .notification {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+    </style>
+    <script>
+        function copyKeyToClipboard(key) {
+            const tempInput = document.createElement('input');
+            tempInput.value = key;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            // Отображение уведомления
+            const notification = document.createElement('div');
+            notification.innerText = 'Ключ был успешно скопирован!';
+            notification.classList.add('notification');
+            document.body.appendChild(notification);
+
+            // Задаем анимацию появления и исчезания уведомления
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateY(0)';
+            }, 10);
+
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateY(50px)';
+            }, 2000);
+
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 2300); // Удаляем уведомление через 2.3 секунды (анимация включая исчезание)
+        }
+    </script>
+</head>
+<body>
+<div class="section-container">
+    <h1>bogdanius project database ezzzzz</h1>
+
+    <form method="post" action="database_operations.php">
+        <div class="input-group">
+            <label for="username">Put username:</label>
+            <input type="text" name="username" required placeholder="Enter username">
+        </div>
+        <div class="input-group">
+            <input type="submit" name="submit" value="Add to base" class="button">
+        </div>
+    </form>
+    <hr>
+
+    <form method="post" action="database_operations.php">
+        <div class="input-group">
+            <label for="deleteUsername">Delete username or key:</label>
+            <input type="text" name="deleteUsername" required placeholder="Enter username or key">
+        </div>
+        <div class="input-group">
+            <input type="submit" name="delete" value="Delete User" class="button">
+        </div>
+    </form>
+    <hr>
+
+    <form method="post" action="database_operations.php">
+        <div class="input-group">
+            <label for="reference">Enter Key or Username:</label>
+            <input type="text" name="reference" required placeholder="Enter Key or Username">
+        </div>
+        <div class="input-group">
+            <label for="newHwid">Enter New HWID:</label>
+            <input type="text" name="newHwid" required placeholder="Enter New HWID">
+        </div>
+        <div class="input-group">
+            <input type="submit" name="updateHwid" value="Update HWID" class="button">
+        </div>
+    </form>
+    <hr>
+
+    <form method="post" action="database_operations.php">
+        <div class="input-group">
+            <label for="checkKey">Enter Key:</label>
+            <input type="text" name="checkKey" required placeholder="Enter Key">
+        </div>
+        <div class="input-group">
+            <label for="checkHwid">Enter HWID:</label>
+            <input type="text" name="checkHwid" required placeholder="Enter HWID">
+        </div>
+        <div class="input-group">
+            <input type="submit" name="check" value="Check key" class="button">
+        </div>
+    </form>
+    <hr>
+
+</div>
+</body>
+</html>
